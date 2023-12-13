@@ -1,0 +1,16 @@
+name: Build
+on:
+  push:
+    paths-ignore: ['**.md', '.gitignore', 'LICENSE']
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+
+      - name: To be completed
+        run: echo "This workflow is not yet completed"

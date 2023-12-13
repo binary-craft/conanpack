@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+# 0. Setup initial values
+compiler_cppstd=${COMPILER_CPPSTD:-gnu23}
+build_args=${BUILD_ARGS:-"-b missing -s compiler.cppstd=${compiler_cppstd}"}
+conan_layer="${CNB_LAYERS_DIR}"/conan
+
+echo "===> Conan buildpack is starting"
+echo "Build args are: ${build_args}"
+
+# 1. Create the layer directory
+echo "Creating Conan layer..."
+mkdir -p "${conan_layer}"
+
+# 2. Get conan properties
+echo "Getting Conan properties using inspect..."
+conan_name=$(conan inspect -f json . | jq -r '.name')
+conan_version=$(conan inspect -f json . | jq -r '.version')
+
+# 3. Execute Conan
+echo "===> Executing Conan build for ${conan_name}:${conan_version}"
+# shellcheck disable=SC2086
+conan build . ${build_args}
+echo "===> Conan build is done"
+
+# 4. Copy runtime files
+echo "Copying runtime files..."
+find ./build/Release/ -type f -name "${conan_name}" -exec cp "{}" "${conan_layer}/" \;
+find ./build/Release/ -type f -name "*.so" -exec cp "{}" "${conan_layer}/" \;
+
+# 5. Tidy up workspace
+echo "Tidying up workspace..."
+rm -rf /workspace/*
+
+# 6. Make conan available during launch and cache it
+echo "Making layer available during launch..."
+echo -e '[types]\ncache = true\nlaunch = true' > "${CNB_LAYERS_DIR}/conan.toml"
+
+# 7. Set default start command
+echo "Setting Docker entrypoint as buildpack command..."
+cat > "${CNB_LAYERS_DIR}/launch.toml" << EOL
+[[processes]]
+type = "web"
+command = ["${conan_layer}/${conan_name}"]
+default = true
+EOL
+
+echo "===> Conan buildpack is done!"

@@ -1,0 +1,18 @@
+api = "0.10"
+
+[buildpack]
+id = "pimhuisman/conanpack"
+name = "Conan Buildpack"
+version = "0.1.0"
+
+[[targets]]
+os = "darwin"
+
+[[targets]]
+os = "freebsd"
+
+[[targets]]
+os = "linux"
+
+[[targets]]
+os = "openbsd"
