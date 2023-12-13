@@ -12,8 +12,11 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
 
+      - name: Set up pack
+        uses: buildpacks/github-actions/setup-pack@v5.0.0
+
       - name: Package the buildpack
-        run: pack buildpack package pimhuisman/conanpack --config ./package.toml
+        run: pack buildpack package ${{ vars.DOCKER_NAMESPACE }}/conanpack --config ./package.toml
 
       - name: Register the buildpack
-        run: pack buildpack register pimhuisman/conanpack
+        run: pack buildpack register ${{ vars.DOCKER_NAMESPACE }}/conanpack
