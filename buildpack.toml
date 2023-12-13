@@ -8,15 +8,19 @@ api = "0.9"
 
 [[targets]]
   os = "darwin"
+  arch = "amd64"
 
 [[targets]]
-  os = "freebsd"
+  os = "darwin"
+  arch = "arm64"
 
 [[targets]]
   os = "linux"
+  arch = "amd64"
 
 [[targets]]
-  os = "openbsd"
+  os = "linux"
+  arch = "arm64"
 
 [[stacks]]
   id = "com.github.pimhuisman.stacks.hera"

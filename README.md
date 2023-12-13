@@ -9,14 +9,14 @@ The published buildpack will be made available on Docker hub. This project conta
 
 See [Docker hub](https://hub.docker.com/r/pimhuisman/conanpack).
 
-```docker pull pimhuisman/conanpack:0.1.0```
+```docker pull pimhuisman/conanpack:<version>```
 
 ## Building images with the buildpack
 There are two options for using this buildpack:
 - Using a builder image that includes it, for example [pim-huisman/cppbuilder](https://github.com/pim-huisman/cppbuilder).
 - Adding it directly on the commandline, this can be done like follows:
 
-```pack build my-app -b pimhuisman/conanpack:0.1.0```
+```pack build my-app -b pimhuisman/conanpack:<version>```
 
 ### Arguments to pass to the build script
 The buildpack has some environment variables / arguments that can be set to customise the build.
@@ -29,24 +29,10 @@ The buildpack has some environment variables / arguments that can be set to cust
 ### Compiler choice
 Conan will choose a default compiler depending on the environment. You can override this by setting the option `-s compiler=gcc` if you want to use GCC, for example.
 
-Also see [the Conan documentation](https://opensource.apple.com/source/clang/clang-23/clang/tools/clang/www/comparison.html#gcc) for more information about these settings.
+Also see [the Conan documentation](https://docs.conan.io/2/reference/commands/build.html) for more information about these settings.
 
 ## Maintaining
-This project is aimed to have a straightforward maintenance by using all relevant automation that we can. Automation is used for:
-- Building and pushing the images on any relevant changes to the `main` branch.
-- Checking for upstream Ubuntu LTS updates and automatically integrating them
-- Snyk vulnerability scanning
-
-### Dependency versions
-#### Ubuntu LTS
-Within the same LTS version there is an automation in place to automatically upgrade to the latest patch and/or minor version.
-If a new Ubuntu LTS (with a major version change) is published this is considered a breaking change, such releases will get their own tags in line with Ubuntu Docker image tagging strategy.
-
-#### APT packages
-APT packages will be automatically updated on rebuild to their latest versions suitable for the Ubuntu LTS release in use.
-
-#### CMake, Conan
-Pinning is done on major versions. Any patch and/or minor updates will be automatically applied on rebuild.
+This project is aimed to have a straightforward maintenance by using all relevant automation that we can.
 
 ## Contributing
 This project is open for any contributions that you might have. Bugfixes and feature enhancements are very welcome.
