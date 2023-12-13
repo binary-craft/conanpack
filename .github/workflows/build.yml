@@ -23,9 +23,9 @@ jobs:
         run: |
           buildpack_id=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.id')
           buildpack_version=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.version')
-          echo "Buildpack identified: $id:$version"
-          echo "{id}=${buildpack_id}" >> $GITHUB_OUTPUT
-          echo "{version}=${buildpack_version}" >> $GITHUB_OUTPUT
+          echo "Buildpack identified: $buildpack_id:$buildpack_version"
+          echo "id=${buildpack_id}" >> $GITHUB_OUTPUT
+          echo "version=${buildpack_version}" >> $GITHUB_OUTPUT
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -33,8 +33,8 @@ jobs:
           username: ${{ vars.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Package ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
+      - name: Package buildpack ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
         run: pack buildpack package ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} --config ./package.toml
 
-      - name: Push ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} to Docker hub
+      - name: Push buildpack ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} to Docker hub
         run: docker push ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
