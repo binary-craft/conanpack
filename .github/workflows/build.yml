@@ -18,12 +18,11 @@ jobs:
       - name: Set up tools
         uses: buildpacks/github-actions/setup-tools@v5.5.1
 
-      - name: Compute metadata
+      - name: Get buildpack metadata
         id: metadata
         run: |
-          parsed_json=$(cat buildpack.toml | yj -tj)
-          id=$(jq -r '.buildpack.id' <<< "$parsed_json")
-          version=$(jq -r '.buildpack.version' <<< "$parsed_json")
+          id=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.id')
+          version=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.version')
           echo "Buildpack identified: $(id):$(version)"
           echo "{id}={$(id)}" >> $GITHUB_OUTPUT
           echo "{version}={$(version)}" >> $GITHUB_OUTPUT
@@ -37,5 +36,5 @@ jobs:
       - name: Package ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
         run: pack buildpack package ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} --config ./package.toml
 
-      - name: Push the buildpack to Docker hub
+      - name: Push ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} to Docker hub
         run: docker push ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
