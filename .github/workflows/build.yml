@@ -23,9 +23,9 @@ jobs:
         run: |
           id=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.id')
           version=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.version')
-          echo "Buildpack identified: $(id):$(version)"
-          echo "{id}={$(id)}" >> $GITHUB_OUTPUT
-          echo "{version}={$(version)}" >> $GITHUB_OUTPUT
+          echo "Buildpack identified: $id:$version"
+          echo "{id}={$id}" >> $GITHUB_OUTPUT
+          echo "{version}={$version}" >> $GITHUB_OUTPUT
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
