@@ -22,8 +22,11 @@ jobs:
         id: metadata
         run: |
           parsed_json=$(cat buildpack.toml | yj -tj)
-          echo "{id}={$(jq -r '.buildpack.id' <<< "$parsed_json")}" >> $GITHUB_OUTPUT
-          echo "{version}={$(jq -r '.buildpack.version' <<< "$parsed_json")}" >> $GITHUB_OUTPUT
+          id=$(jq -r '.buildpack.id' <<< "$parsed_json")
+          version=$(jq -r '.buildpack.version' <<< "$parsed_json")
+          echo "Buildpack identified: $(id):$(version)"
+          echo "{id}={$(id)}" >> $GITHUB_OUTPUT
+          echo "{version}={$(version)}" >> $GITHUB_OUTPUT
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
