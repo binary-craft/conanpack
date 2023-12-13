@@ -4,6 +4,7 @@ api = "0.9"
   id = "pimhuisman/conanpack"
   name = "Conan Buildpack"
   version = "0.1.0"
+  description = "Cloud Native Buildpack for C and C++ with Conan"
 
 [[targets]]
   os = "darwin"
