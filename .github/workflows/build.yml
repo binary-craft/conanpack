@@ -12,5 +12,29 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
 
-      - name: To be completed
-        run: echo "This workflow is not yet completed"
+      - name: Set up pack
+        uses: buildpacks/github-actions/setup-pack@v5.5.1
+
+      - name: Set up tools
+        uses: buildpacks/github-actions/setup-tools@v5.5.1
+
+      - name: Get buildpack metadata
+        id: metadata
+        run: |
+          buildpack_id=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.id')
+          buildpack_version=$(cat buildpack.toml | yj -tj | jq -r '.buildpack.version')
+          echo "Buildpack identified: $buildpack_id:$buildpack_version"
+          echo "id=${buildpack_id}" >> $GITHUB_OUTPUT
+          echo "version=${buildpack_version}" >> $GITHUB_OUTPUT
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Package buildpack ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
+        run: pack buildpack package ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} --config ./package.toml
+
+      - name: Push buildpack ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} to Docker hub
+        run: docker push ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}
