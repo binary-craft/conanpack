@@ -1,18 +1,21 @@
-api = "0.10"
+api = "0.9"
 
 [buildpack]
-id = "pimhuisman/conanpack"
-name = "Conan Buildpack"
-version = "0.1.0"
+  id = "pimhuisman/conanpack"
+  name = "Conan Buildpack"
+  version = "0.1.0"
 
 [[targets]]
-os = "darwin"
+  os = "darwin"
 
 [[targets]]
-os = "freebsd"
+  os = "freebsd"
 
 [[targets]]
-os = "linux"
+  os = "linux"
 
 [[targets]]
-os = "openbsd"
+  os = "openbsd"
+
+[[stacks]]
+  id = "com.github.pimhuisman.stacks.hera"
