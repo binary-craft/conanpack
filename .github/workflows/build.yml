@@ -12,5 +12,8 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
 
-      - name: To be completed
-        run: echo "This workflow is not yet completed"
+      - name: Package the buildpack
+        run: pack buildpack package pimhuisman/conanpack --config ./package.toml
+
+      - name: Register the buildpack
+        run: pack buildpack register pimhuisman/conanpack
