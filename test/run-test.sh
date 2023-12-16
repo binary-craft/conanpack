@@ -2,7 +2,7 @@
 set -eo pipefail
 
 pack builder create test-builder --config ./test-builder.toml --pull-policy if-not-present
-pack build example-project --builder test-builder --path ../example-project --pull-policy if-not-present
+pack build example-project --builder test-builder --path example-project --pull-policy if-not-present
 docker_output=$(docker run example-project)
 
 if [[ "${docker_output}" == "Hello, world!" ]]; then

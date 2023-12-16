@@ -31,7 +31,7 @@ jobs:
         run: pack buildpack package ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} --config ./package.toml
 
       - name: Run test
-        working-directory: test-files
+        working-directory: test
         run: bash run-test.sh
 
       - name: Log in to Docker Hub
