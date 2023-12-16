@@ -1,13 +1,13 @@
-name: Build
+name: Build and push
 on:
   push:
-    branches-ignore: [main]
+    branches: [main]
     paths-ignore: ['**.md', '.gitignore', 'LICENSE']
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Build
+  build-and-push:
+    name: Build and push
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
@@ -29,3 +29,12 @@ jobs:
       - name: Run test
         working-directory: test
         run: bash run-test.sh
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Push buildpack ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }} to Docker hub
+        run: docker push ${{ steps.metadata.outputs.id }}:${{ steps.metadata.outputs.version }}

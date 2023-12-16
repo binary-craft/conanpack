@@ -1,0 +1,13 @@
+[[buildpacks]]
+  uri = "../"
+
+[[order]]
+  [[order.group]]
+    id = "pimhuisman/conanpack"
+
+[build]
+  image = "pimhuisman/hera-builder-base:jammy"
+
+[run]
+  [[run.images]]
+    image = "pimhuisman/hera-runner-base:jammy"

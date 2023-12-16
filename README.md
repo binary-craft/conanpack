@@ -1,5 +1,5 @@
 # Cloud Native Buildpack for C and C++ with Conan
-[![Build](https://github.com/pim-huisman/conanpack/actions/workflows/build.yml/badge.svg)](https://github.com/pim-huisman/conanpack/actions/workflows/build.yml)
+[![Build and push](https://github.com/pim-huisman/conanpack/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/pim-huisman/conanpack/actions/workflows/build-and-push.yml)
 
 ## About
 This project is used to create a Cloud Native Buildpack for Conan that can be used for native applications such as C and C++.
@@ -21,10 +21,10 @@ There are two options for using this buildpack:
 ### Arguments to pass to the build script
 The buildpack has some environment variables / arguments that can be set to customise the build.
 
-| Variable        | Description                                   | Default value                                    |
-|-----------------|-----------------------------------------------|--------------------------------------------------|
-| BUILD_ARGS      | Build arguments to pass to Conan              | `-b missing -s compiler.cppstd=$COMPILER_CPPSTD` |
-| COMPILER_CPPSTD | Compiler std to set in default build argument | gnu23                                            |
+| Variable                 | Description                                   | Default value                                    |
+|--------------------------|-----------------------------------------------|--------------------------------------------------|
+| BP_CONAN_BUILD_ARGS      | Build arguments to pass to Conan              | `-b missing -s compiler.cppstd=$COMPILER_CPPSTD` |
+| BP_CONAN_COMPILER_CPPSTD | Compiler std to set in default build argument | gnu23                                            |
 
 ### Compiler choice
 Conan will choose a default compiler depending on the environment. You can override this by setting the option `-s compiler=gcc` if you want to use GCC, for example.
