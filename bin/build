@@ -2,8 +2,8 @@
 set -eo pipefail
 
 # 0. Setup initial values
-compiler_cppstd=${COMPILER_CPPSTD:-gnu23}
-build_args=${BUILD_ARGS:-"-b missing -s compiler.cppstd=${compiler_cppstd}"}
+compiler_cppstd=${BP_CONAN_COMPILER_CPPSTD:-gnu23}
+build_args=${BP_CONAN_BUILD_ARGS:-"-b missing -s compiler.cppstd=${compiler_cppstd}"}
 conan_layer="${CNB_LAYERS_DIR}"/conan
 
 echo "===> Conan buildpack is starting"
