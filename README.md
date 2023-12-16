@@ -13,7 +13,7 @@ See [Docker hub](https://hub.docker.com/r/pimhuisman/conanpack).
 
 ## Building images with the buildpack
 There are two options for using this buildpack:
-- Using a builder image that includes it, for example [pim-huisman/cppbuilder](https://github.com/pim-huisman/cppbuilder).
+- Using a builder image that includes it, for example [pim-huisman/hera-builder](https://github.com/pim-huisman/hera-builder).
 - Adding it directly on the commandline, this can be done like follows:
 
 ```pack build my-app -b pimhuisman/conanpack:<version>```
