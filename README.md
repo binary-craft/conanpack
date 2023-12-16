@@ -1,5 +1,5 @@
 # Cloud Native Buildpack for C and C++ with Conan
-[![Build](https://github.com/pim-huisman/conanpack/actions/workflows/build.yml/badge.svg)](https://github.com/pim-huisman/conanpack/actions/workflows/build.yml)
+[![Build and push](https://github.com/pim-huisman/conanpack/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/pim-huisman/conanpack/actions/workflows/build-and-push.yml)
 
 ## About
 This project is used to create a Cloud Native Buildpack for Conan that can be used for native applications such as C and C++.
