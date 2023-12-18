@@ -4,7 +4,7 @@ set -eo pipefail
 # 0. Setup initial values
 compiler_cppstd=${BP_CONAN_COMPILER_CPPSTD:-gnu23}
 build_args=${BP_CONAN_BUILD_ARGS:-"-b missing -s compiler.cppstd=${compiler_cppstd}"}
-conan_layer="${CNB_LAYERS_DIR}"/conan
+conan_layer=${CNB_LAYERS_DIR}/conan
 
 echo "===> Conan buildpack is starting"
 echo "Build args are: ${build_args}"
@@ -20,8 +20,7 @@ conan_version=$(conan inspect -f json . | jq -r '.version')
 
 # 3. Execute Conan
 echo "===> Executing Conan build for ${conan_name}:${conan_version}"
-# shellcheck disable=SC2086
-conan build . ${build_args}
+eval conan build . "${build_args}"
 echo "===> Conan build is done"
 
 # 4. Copy runtime files
