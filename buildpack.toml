@@ -1,7 +1,7 @@
 api = "0.9"
 
 [buildpack]
-  id = "pimhuisman/conanpack"
+  id = "bincraft/conanpack"
   name = "Conan Buildpack"
   version = "0.1.0"
   description = "Cloud Native Buildpack for C and C++ with Conan"
@@ -23,4 +23,4 @@ api = "0.9"
   arch = "arm64"
 
 [[stacks]]
-  id = "com.github.pimhuisman.stacks.hera"
+  id = "net.binarycraft.stacks.hera"

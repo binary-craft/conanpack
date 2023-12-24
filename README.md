@@ -1,5 +1,5 @@
 # Cloud Native Buildpack for C and C++ with Conan
-[![Build and push](https://github.com/pim-huisman/conanpack/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/pim-huisman/conanpack/actions/workflows/build-and-push.yml)
+[![Build and push](https://github.com/binary-craft/conanpack/actions/workflows/build-and-push.yml/badge.svg)](https://github.com/binary-craft/conanpack/actions/workflows/build-and-push.yml)
 
 ## About
 This project is used to create a Cloud Native Buildpack for Conan that can be used for native applications such as C and C++.
@@ -7,16 +7,16 @@ This project is used to create a Cloud Native Buildpack for Conan that can be us
 ## Using the buildpack
 The published buildpack will be made available on Docker hub. This project contains the source and is used to build it.
 
-See [Docker hub](https://hub.docker.com/r/pimhuisman/conanpack).
+See [Docker hub](https://hub.docker.com/r/bincraft/conanpack).
 
-```docker pull pimhuisman/conanpack:<version>```
+```docker pull bincraft/conanpack:<version>```
 
 ## Building images with the buildpack
 There are two options for using this buildpack:
-- Using a builder image that includes it, for example [pim-huisman/hera-builder](https://github.com/pim-huisman/hera-builder).
+- Using a builder image that includes it, for example [binary-craft/hera-builder](https://github.com/binary-craft/hera-builder).
 - Adding it directly on the commandline, this can be done like follows:
 
-```pack build my-app -b pimhuisman/conanpack:<version>```
+```pack build my-app -b bincraft/conanpack:<version>```
 
 ### Arguments to pass to the build script
 The buildpack has some environment variables / arguments that can be set to customise the build.

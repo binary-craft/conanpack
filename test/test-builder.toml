@@ -3,11 +3,11 @@
 
 [[order]]
   [[order.group]]
-    id = "pimhuisman/conanpack"
+    id = "bincraft/conanpack"
 
 [build]
-  image = "pimhuisman/hera-builder-base:jammy"
+  image = "bincraft/hera-builder-base:jammy"
 
 [run]
   [[run.images]]
-    image = "pimhuisman/hera-runner-base:jammy"
+    image = "bincraft/hera-runner-base:jammy"
